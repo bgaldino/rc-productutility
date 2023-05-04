@@ -56,7 +56,7 @@
         <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>RC Product Creation</masterLabel>
+    <masterLabel>Revenue Cloud Product Utility</masterLabel>
     <template>
         <name>flexipage:appHomeTemplateHeaderTwoColumnsLeftSidebar</name>
     </template>
