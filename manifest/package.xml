@@ -1,36 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>GetOrgBaseUrl</members>
+        <members>MultiSelectFlowValues</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexComponent</name>
+        <members>RC_Product_Utility</members>
+        <name>CustomApplication</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexPage</name>
+        <members>RC_Product_Creation</members>
+        <name>CustomTab</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
+        <members>RC_Product_Creation</members>
+        <name>FlexiPage</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexTrigger</name>
+        <members>RC_Product_Creation_Engine</members>
+        <name>Flow</name>
     </types>
     <types>
-        <members>*</members>
-        <name>AuraDefinitionBundle</name>
+        <members>RC_Product_Utility</members>
+        <name>PermissionSet</name>
     </types>
     <types>
-        <members>*</members>
-        <name>LightningComponentBundle</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>StaticResource</name>
+        <members>Admin</members>
+        <name>Profile</name>
     </types>
     <version>57.0</version>
 </Package>
