@@ -471,7 +471,7 @@
         <scale>2</scale>
     </formulas>
     <interviewLabel>Product Creation Engine {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Product Creation Engine</label>
+    <label>RC - Product Creation Engine</label>
     <loops>
         <name>LoopCategories</name>
         <label>LoopCategories</label>
@@ -1748,7 +1748,7 @@
         </inputAssignments>
         <object>Product2</object>
     </recordUpdates>
-    <runInMode>SystemModeWithoutSharing</runInMode>
+    <runInMode>DefaultMode</runInMode>
     <screens>
         <name>Baseline_Product_Fields</name>
         <label>Baseline Product Fields</label>
