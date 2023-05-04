@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
         <name>GetOrgBaseUrl</name>
         <label>GetOrgBaseUrl</label>
@@ -341,21 +340,20 @@
             <label>Recurring PSM</label>
         </rules>
     </decisions>
-    <description>v39 is stable. 5/4 Work in Progress
-        v40 includes pricebook Functions and filters</description>
+    <description>v3 - fixing the end screen</description>
     <dynamicChoiceSets>
         <name>BillingFrequency</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>SBQQ__BillingFrequency__c</picklistField>
         <picklistObject>Product2</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>BillingType</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>SBQQ__BillingType__c</picklistField>
         <picklistObject>Product2</picklistObject>
     </dynamicChoiceSets>
@@ -377,8 +375,8 @@
     <dynamicChoiceSets>
         <name>ChargeType</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>SBQQ__ChargeType__c</picklistField>
         <picklistObject>Product2</picklistObject>
     </dynamicChoiceSets>
@@ -444,8 +442,8 @@
     <dynamicChoiceSets>
         <name>ProductFamily</name>
         <dataType>Picklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>Family</picklistField>
         <picklistObject>Product2</picklistObject>
     </dynamicChoiceSets>
@@ -2169,20 +2167,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>EndScreen</name>
-            <fieldText>&lt;p&gt;View your created product by clicking the following
-                link.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a
-                href=&quot;{!varT_productFullUrl}&quot; rel=&quot;noopener noreferrer&quot;
-                target=&quot;_blank&quot;&gt;New Product Record:
-                {!Get_Final_Product.Name}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If
-                using Commerce, make sure to &lt;strong&gt;Rebuild your Search Index&lt;/strong&gt;
-                on your active stores from &lt;a
-                href=&quot;{!varT_baseURL}/lightning/setup/CommerceStore/home&quot;
-                rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Commerce
-                Setup&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Active Commerce
-                Stores:&lt;/p&gt;&lt;p&gt;&lt;a
-                href=&quot;{!varT_baseURL}/lightning/r/WebStore/{!Get_b2bsm_Store_Id.Id}/view&quot;
-                rel=&quot;noopener noreferrer&quot;
-                target=&quot;_blank&quot;&gt;{!Get_b2bsm_Store_Id.Name}&lt;/a&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;View your created product by clicking the following link.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!varT_productFullUrl}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;New Product Record: {!Get_Final_Product.Name}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If using Commerce, make sure to &lt;strong&gt;Rebuild your Search Index&lt;/strong&gt; on your active stores from &lt;a href=&quot;{!varT_baseURL}/lightning/setup/CommerceStore/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Commerce Setup&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Active Commerce Stores:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!varT_baseURL}/lightning/r/WebStore/{!Get_b2bsm_Store_Id.Id}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;{!Get_b2bsm_Store_Id.Name}&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
