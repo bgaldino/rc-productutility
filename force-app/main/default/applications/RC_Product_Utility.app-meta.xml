@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomApplication xmlns="https://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <brand>
         <headerColor>#0070D2</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
@@ -13,7 +13,6 @@
     <navType>Console</navType>
     <tabs>RC_Product_Creation</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Revenue_Cloud_Product_Utility_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
             <tab>RC_Product_Creation</tab>
