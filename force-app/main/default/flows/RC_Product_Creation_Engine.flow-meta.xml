@@ -4,7 +4,7 @@
         <name>GetOrgBaseUrl</name>
         <label>GetOrgBaseUrl</label>
         <locationX>534</locationX>
-        <locationY>8534</locationY>
+        <locationY>9326</locationY>
         <actionName>GetOrgBaseUrl</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -34,7 +34,7 @@
         <name>ParseCategoriesSelectionCommerce</name>
         <label>ParseCategoriesSelectionCommerce</label>
         <locationX>402</locationX>
-        <locationY>7502</locationY>
+        <locationY>8294</locationY>
         <actionName>MultiSelectFlowValues</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -53,7 +53,7 @@
         <name>ParseCommerceEntitlementPolicies</name>
         <label>ParseCommerceEntitlementPolicies</label>
         <locationX>402</locationX>
-        <locationY>7046</locationY>
+        <locationY>7838</locationY>
         <actionName>MultiSelectFlowValues</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -72,7 +72,7 @@
         <name>ParseCommercePricebooks</name>
         <label>ParseCommercePricebooks</label>
         <locationX>402</locationX>
-        <locationY>5366</locationY>
+        <locationY>6158</locationY>
         <actionName>MultiSelectFlowValues</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -91,7 +91,7 @@
         <name>ParseCPQPricebookSelections</name>
         <label>ParseCPQPricebookSelections</label>
         <locationX>314</locationX>
-        <locationY>1118</locationY>
+        <locationY>1910</locationY>
         <actionName>MultiSelectFlowValues</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -110,7 +110,7 @@
         <name>ParseProductSellingModels</name>
         <label>ParseProductSellingModels</label>
         <locationX>402</locationX>
-        <locationY>5246</locationY>
+        <locationY>6038</locationY>
         <actionName>MultiSelectFlowValues</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -126,6 +126,22 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <apiVersion>57.0</apiVersion>
+    <assignments>
+        <name>Image</name>
+        <label>Image</label>
+        <locationX>490</locationX>
+        <locationY>998</locationY>
+        <assignmentItems>
+            <assignToReference>ImageVersionId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>LoopImages</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>LoopImages</targetReference>
+        </connector>
+    </assignments>
     <choices>
         <name>EvergreenSubscription</name>
         <choiceText>Evergreen Subscription</choiceText>
@@ -150,11 +166,27 @@
             <stringValue>TermSubscription</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>Upload</name>
+        <choiceText>Upload</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Upload</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>URL</name>
+        <choiceText>URL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>URL</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>Billing_Charge_Type</name>
         <label>Billing Charge Type</label>
         <locationX>336</locationX>
-        <locationY>4574</locationY>
+        <locationY>5366</locationY>
         <defaultConnector>
             <targetReference>Update_One_Time_Billing_Fields</targetReference>
         </defaultConnector>
@@ -179,7 +211,7 @@
         <name>If_Billing</name>
         <label>If Billing</label>
         <locationX>534</locationX>
-        <locationY>3614</locationY>
+        <locationY>4406</locationY>
         <defaultConnector>
             <targetReference>If_Commerce</targetReference>
         </defaultConnector>
@@ -204,7 +236,7 @@
         <name>If_Commerce</name>
         <label>If Commerce</label>
         <locationX>534</locationX>
-        <locationY>5006</locationY>
+        <locationY>5798</locationY>
         <defaultConnector>
             <targetReference>Get_Final_Product</targetReference>
         </defaultConnector>
@@ -229,7 +261,7 @@
         <name>If_Configurable</name>
         <label>If Configurable</label>
         <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationY>2150</locationY>
         <defaultConnector>
             <targetReference>If_Subscription_Term</targetReference>
         </defaultConnector>
@@ -254,7 +286,7 @@
         <name>If_CPQ</name>
         <label>If CPQ</label>
         <locationX>534</locationX>
-        <locationY>878</locationY>
+        <locationY>1670</locationY>
         <defaultConnector>
             <targetReference>If_Billing</targetReference>
         </defaultConnector>
@@ -276,10 +308,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>If_ImageType</name>
+        <label>If ImageType</label>
+        <locationX>534</locationX>
+        <locationY>758</locationY>
+        <defaultConnector>
+            <targetReference>UpdateImageURL</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>ImageUploadURL</defaultConnectorLabel>
+        <rules>
+            <name>ImageUploadFiles</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ImageType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Upload</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>LoopImages</targetReference>
+            </connector>
+            <label>ImageUploadFiles</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>If_Subscription_Term</name>
         <label>If Subscription Term</label>
         <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationY>2486</locationY>
         <defaultConnector>
             <targetReference>LoopCPQCurrencyStandard</targetReference>
         </defaultConnector>
@@ -319,7 +376,7 @@
         <name>Product_Selling_Models_Decision</name>
         <label>Product Selling Models Decision</label>
         <locationX>754</locationX>
-        <locationY>5606</locationY>
+        <locationY>6398</locationY>
         <defaultConnector>
             <targetReference>Create_One_Time_Product_Selling_Models</targetReference>
         </defaultConnector>
@@ -340,7 +397,7 @@
             <label>Recurring PSM</label>
         </rules>
     </decisions>
-    <description>v3 - fixing the end screen</description>
+    <description>v3 - product images</description>
     <dynamicChoiceSets>
         <name>BillingFrequency</name>
         <dataType>Picklist</dataType>
@@ -503,13 +560,18 @@
         <expression>{!LoopCPQCurrencyStandard.ConversionRate}*{!Standard_Price}</expression>
         <scale>2</scale>
     </formulas>
+    <formulas>
+        <name>Uploaded_Image</name>
+        <dataType>String</dataType>
+        <expression>IF(ISNULL({!ImageVersionId}), &quot;&quot;, &quot;/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpeg&amp;versionId=&quot; &amp;{!ImageVersionId})</expression>
+    </formulas>
     <interviewLabel>Product Creation Engine {!$Flow.CurrentDateTime}</interviewLabel>
     <label>RC - Product Creation Engine</label>
     <loops>
         <name>LoopCategories</name>
         <label>LoopCategories</label>
         <locationX>402</locationX>
-        <locationY>7622</locationY>
+        <locationY>8414</locationY>
         <collectionReference>ParseCategoriesSelectionCommerce</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -523,7 +585,7 @@
         <name>LoopCommerceCurrencyPricebooks</name>
         <label>LoopCommerceCurrencyPricebooks</label>
         <locationX>754</locationX>
-        <locationY>6398</locationY>
+        <locationY>7190</locationY>
         <collectionReference>Get_Currencies</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -537,7 +599,7 @@
         <name>LoopCommerceCurrencyStandard</name>
         <label>LoopCommerceCurrencyStandard</label>
         <locationX>754</locationX>
-        <locationY>6062</locationY>
+        <locationY>6854</locationY>
         <collectionReference>Get_Currencies</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -551,7 +613,7 @@
         <name>LoopCommerceEntitlementProducts</name>
         <label>LoopCommerceEntitlementProducts</label>
         <locationX>402</locationX>
-        <locationY>7166</locationY>
+        <locationY>7958</locationY>
         <collectionReference>ParseCommerceEntitlementPolicies</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -565,7 +627,7 @@
         <name>LoopCommercePricebooks</name>
         <label>LoopCommercePricebooks</label>
         <locationX>930</locationX>
-        <locationY>6518</locationY>
+        <locationY>7310</locationY>
         <collectionReference>ParseCommercePricebooks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -579,7 +641,7 @@
         <name>LoopCPQCurrencyPricebooks</name>
         <label>LoopCPQCurrencyPricebooks</label>
         <locationX>314</locationX>
-        <locationY>2486</locationY>
+        <locationY>3278</locationY>
         <collectionReference>Get_Currencies</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -593,7 +655,7 @@
         <name>LoopCPQCurrencyStandard</name>
         <label>LoopCPQCurrencyStandard</label>
         <locationX>314</locationX>
-        <locationY>2030</locationY>
+        <locationY>2822</locationY>
         <collectionReference>Get_Currencies</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -604,10 +666,24 @@
         </noMoreValuesConnector>
     </loops>
     <loops>
+        <name>LoopImages</name>
+        <label>LoopImages</label>
+        <locationX>402</locationX>
+        <locationY>878</locationY>
+        <collectionReference>FileUpload.contentVersionIds</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Image</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>UpdateImageFiles</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
         <name>LoopPricebookSelection</name>
         <label>LoopPricebookSelection</label>
         <locationX>490</locationX>
-        <locationY>2606</locationY>
+        <locationY>3398</locationY>
         <collectionReference>ParseCPQPricebookSelections</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -621,7 +697,7 @@
         <name>LoopProductSellingModels</name>
         <label>LoopProductSellingModels</label>
         <locationX>402</locationX>
-        <locationY>5486</locationY>
+        <locationY>6278</locationY>
         <collectionReference>ParseProductSellingModels</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -654,7 +730,7 @@
         <name>Create_Approval_Threshold_1</name>
         <label>Create Approval Threshold 1</label>
         <locationX>314</locationX>
-        <locationY>3038</locationY>
+        <locationY>3830</locationY>
         <connector>
             <targetReference>Create_Approval_Threshold_2</targetReference>
         </connector>
@@ -701,7 +777,7 @@
         <name>Create_Approval_Threshold_2</name>
         <label>Create Approval Threshold 2</label>
         <locationX>314</locationX>
-        <locationY>3158</locationY>
+        <locationY>3950</locationY>
         <connector>
             <targetReference>Create_Approval_Threshold_3</targetReference>
         </connector>
@@ -748,7 +824,7 @@
         <name>Create_Approval_Threshold_3</name>
         <label>Create Approval Threshold 3</label>
         <locationX>314</locationX>
-        <locationY>3278</locationY>
+        <locationY>4070</locationY>
         <connector>
             <targetReference>Create_Approval_Threshold_4</targetReference>
         </connector>
@@ -795,7 +871,7 @@
         <name>Create_Approval_Threshold_4</name>
         <label>Create Approval Threshold 4</label>
         <locationX>314</locationX>
-        <locationY>3398</locationY>
+        <locationY>4190</locationY>
         <connector>
             <targetReference>If_Billing</targetReference>
         </connector>
@@ -841,7 +917,7 @@
         <locationX>534</locationX>
         <locationY>518</locationY>
         <connector>
-            <targetReference>Get_Currencies</targetReference>
+            <targetReference>Insert_Image</targetReference>
         </connector>
         <inputAssignments>
             <field>Description</field>
@@ -886,7 +962,7 @@
         <name>Create_Commerce_Entitlements</name>
         <label>Create Commerce Entitlements</label>
         <locationX>490</locationX>
-        <locationY>7286</locationY>
+        <locationY>8078</locationY>
         <connector>
             <targetReference>LoopCommerceEntitlementProducts</targetReference>
         </connector>
@@ -909,7 +985,7 @@
         <name>Create_Commerce_Pricebook_Entries</name>
         <label>Create Commerce Pricebook Entries</label>
         <locationX>1018</locationX>
-        <locationY>6638</locationY>
+        <locationY>7430</locationY>
         <connector>
             <targetReference>LoopCommercePricebooks</targetReference>
         </connector>
@@ -956,7 +1032,7 @@
         <name>Create_Commerce_Standard_Pricebook_Entries</name>
         <label>Create Commerce Standard Pricebook Entries</label>
         <locationX>842</locationX>
-        <locationY>6182</locationY>
+        <locationY>6974</locationY>
         <connector>
             <targetReference>LoopCommerceCurrencyStandard</targetReference>
         </connector>
@@ -1003,7 +1079,7 @@
         <name>Create_CPQ_Cost_Standard_Price</name>
         <label>Create CPQ Cost Standard Price</label>
         <locationX>402</locationX>
-        <locationY>2150</locationY>
+        <locationY>2942</locationY>
         <connector>
             <targetReference>Create_CPQ_Standard_Pricebook_Entry</targetReference>
         </connector>
@@ -1038,7 +1114,7 @@
         <name>Create_CPQ_Pricebook_Entry</name>
         <label>Create CPQ Pricebook Entry</label>
         <locationX>578</locationX>
-        <locationY>2726</locationY>
+        <locationY>3518</locationY>
         <connector>
             <targetReference>LoopPricebookSelection</targetReference>
         </connector>
@@ -1079,7 +1155,7 @@
         <name>Create_CPQ_Standard_Pricebook_Entry</name>
         <label>Create CPQ Standard Pricebook Entry</label>
         <locationX>402</locationX>
-        <locationY>2270</locationY>
+        <locationY>3062</locationY>
         <connector>
             <targetReference>LoopCPQCurrencyStandard</targetReference>
         </connector>
@@ -1120,7 +1196,7 @@
         <name>Create_One_Time_Product_Selling_Models</name>
         <label>Create One-Time Product Selling Models</label>
         <locationX>886</locationX>
-        <locationY>5726</locationY>
+        <locationY>6518</locationY>
         <connector>
             <targetReference>LoopCommerceCurrencyStandard</targetReference>
         </connector>
@@ -1143,7 +1219,7 @@
         <name>Create_Product_Category_Products</name>
         <label>Create Product Category Products</label>
         <locationX>490</locationX>
-        <locationY>7742</locationY>
+        <locationY>8534</locationY>
         <connector>
             <targetReference>LoopCategories</targetReference>
         </connector>
@@ -1172,7 +1248,7 @@
         <name>Create_Recurring_Product_Selling_Models</name>
         <label>Create Recurring Product Selling Models</label>
         <locationX>622</locationX>
-        <locationY>5846</locationY>
+        <locationY>6638</locationY>
         <connector>
             <targetReference>LoopCommerceCurrencyStandard</targetReference>
         </connector>
@@ -1201,7 +1277,7 @@
         <name>Find_One_Time_Billing_Rule</name>
         <label>Find One-Time Billing Rule</label>
         <locationX>336</locationX>
-        <locationY>3974</locationY>
+        <locationY>4766</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_Recurring_Billing_Rule</targetReference>
@@ -1222,7 +1298,7 @@
         <name>Find_One_Time_Rev_Rec_Rule</name>
         <label>Find One-Time Rev Rec Rule</label>
         <locationX>336</locationX>
-        <locationY>4214</locationY>
+        <locationY>5006</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_Recurring_Rev_Rec_Rule</targetReference>
@@ -1243,7 +1319,7 @@
         <name>Find_Recurring_Billing_Rule</name>
         <label>Find Recurring Billing Rule</label>
         <locationX>336</locationX>
-        <locationY>4094</locationY>
+        <locationY>4886</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_One_Time_Rev_Rec_Rule</targetReference>
@@ -1264,7 +1340,7 @@
         <name>Find_Recurring_Rev_Rec_Rule</name>
         <label>Find Recurring Rev Rec Rule</label>
         <locationX>336</locationX>
-        <locationY>4334</locationY>
+        <locationY>5126</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Find_Tax_Rule</targetReference>
@@ -1285,7 +1361,7 @@
         <name>Find_Tax_Rule</name>
         <label>Find Tax Rule</label>
         <locationX>336</locationX>
-        <locationY>4454</locationY>
+        <locationY>5246</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Billing_Charge_Type</targetReference>
@@ -1306,7 +1382,7 @@
         <name>Get_b2bsm_Store_Id</name>
         <label>Get b2bsm Store Id</label>
         <locationX>534</locationX>
-        <locationY>8654</locationY>
+        <locationY>9446</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>End</targetReference>
@@ -1327,7 +1403,7 @@
         <name>Get_Billing_Policy</name>
         <label>Get Billing Policy</label>
         <locationX>402</locationX>
-        <locationY>7958</locationY>
+        <locationY>8750</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Tax_Policy</targetReference>
@@ -1348,7 +1424,7 @@
         <name>Get_Currencies</name>
         <label>Get Currencies</label>
         <locationX>534</locationX>
-        <locationY>638</locationY>
+        <locationY>1430</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Uploaded_Product</targetReference>
@@ -1369,7 +1445,7 @@
         <name>Get_Final_Product</name>
         <label>Get Final Product</label>
         <locationX>534</locationX>
-        <locationY>8414</locationY>
+        <locationY>9206</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GetOrgBaseUrl</targetReference>
@@ -1390,7 +1466,7 @@
         <name>Get_Monthly_Proration_Policy</name>
         <label>Get Monthly Proration Policy</label>
         <locationX>622</locationX>
-        <locationY>5726</locationY>
+        <locationY>6518</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Create_Recurring_Product_Selling_Models</targetReference>
@@ -1432,7 +1508,7 @@
         <name>Get_Tax_Policy</name>
         <label>Get Tax Policy</label>
         <locationX>402</locationX>
-        <locationY>8078</locationY>
+        <locationY>8870</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>UpdateSMFields</targetReference>
@@ -1453,7 +1529,7 @@
         <name>Get_Uploaded_Product</name>
         <label>Get Uploaded Product</label>
         <locationX>534</locationX>
-        <locationY>758</locationY>
+        <locationY>1550</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>If_CPQ</targetReference>
@@ -1502,7 +1578,7 @@
         <name>Update_Billing_Fields</name>
         <label>Update Billing Fields</label>
         <locationX>336</locationX>
-        <locationY>3854</locationY>
+        <locationY>4646</locationY>
         <connector>
             <targetReference>Find_One_Time_Billing_Rule</targetReference>
         </connector>
@@ -1544,7 +1620,7 @@
         <name>Update_One_Time_Billing_Fields</name>
         <label>Update One-Time Billing Fields</label>
         <locationX>468</locationX>
-        <locationY>4694</locationY>
+        <locationY>5486</locationY>
         <connector>
             <targetReference>If_Commerce</targetReference>
         </connector>
@@ -1580,7 +1656,7 @@
         <name>Update_Record_Evergreen_Subscription</name>
         <label>Update Record Evergreen Subscription</label>
         <locationX>314</locationX>
-        <locationY>1814</locationY>
+        <locationY>2606</locationY>
         <connector>
             <targetReference>LoopCPQCurrencyStandard</targetReference>
         </connector>
@@ -1638,7 +1714,7 @@
         <name>Update_Record_Term_Subscription</name>
         <label>Update Record Term Subscription</label>
         <locationX>50</locationX>
-        <locationY>1814</locationY>
+        <locationY>2606</locationY>
         <connector>
             <targetReference>LoopCPQCurrencyStandard</targetReference>
         </connector>
@@ -1702,7 +1778,7 @@
         <name>Update_Record_with_CPQ_Configuration</name>
         <label>Update Record with CPQ Configuration</label>
         <locationX>182</locationX>
-        <locationY>1478</locationY>
+        <locationY>2270</locationY>
         <connector>
             <targetReference>If_Subscription_Term</targetReference>
         </connector>
@@ -1760,7 +1836,7 @@
         <name>Update_Record_with_Standard_CPQ_Configuration</name>
         <label>Update Record with Standard CPQ Configuration</label>
         <locationX>314</locationX>
-        <locationY>1238</locationY>
+        <locationY>2030</locationY>
         <connector>
             <targetReference>If_Configurable</targetReference>
         </connector>
@@ -1812,7 +1888,7 @@
         <name>Update_Recurring_Billing_Fields</name>
         <label>Update Recurring Billing Fields</label>
         <locationX>204</locationX>
-        <locationY>4694</locationY>
+        <locationY>5486</locationY>
         <connector>
             <targetReference>If_Commerce</targetReference>
         </connector>
@@ -1845,10 +1921,58 @@
         <object>Product2</object>
     </recordUpdates>
     <recordUpdates>
+        <name>UpdateImageFiles</name>
+        <label>UpdateImageFiles</label>
+        <locationX>402</locationX>
+        <locationY>1214</locationY>
+        <connector>
+            <targetReference>Get_Currencies</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_Baseline_Product</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Product_Picture_ID_URL__c</field>
+            <value>
+                <elementReference>Uploaded_Image</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Product2</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>UpdateImageURL</name>
+        <label>UpdateImageURL</label>
+        <locationX>666</locationX>
+        <locationY>878</locationY>
+        <connector>
+            <targetReference>Get_Currencies</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_Baseline_Product</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Product_Picture_ID_URL__c</field>
+            <value>
+                <elementReference>Enter_Hyperlink</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Product2</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>UpdateSMFields</name>
         <label>UpdateSMFields</label>
         <locationX>402</locationX>
-        <locationY>8198</locationY>
+        <locationY>8990</locationY>
         <connector>
             <targetReference>Get_Final_Product</targetReference>
         </connector>
@@ -1952,7 +2076,7 @@
         <name>BillingFields</name>
         <label>Billing Fields</label>
         <locationX>336</locationX>
-        <locationY>3734</locationY>
+        <locationY>4526</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -2056,7 +2180,7 @@
         <name>Commerce_Fields</name>
         <label>Commerce Fields</label>
         <locationX>402</locationX>
-        <locationY>5126</locationY>
+        <locationY>5918</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -2122,7 +2246,7 @@
         <name>CPQ_Fields</name>
         <label>CPQ Fields</label>
         <locationX>314</locationX>
-        <locationY>998</locationY>
+        <locationY>1790</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -2233,7 +2357,7 @@
         <name>End</name>
         <label>End</label>
         <locationX>534</locationX>
-        <locationY>8774</locationY>
+        <locationY>9566</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -2241,6 +2365,77 @@
             <name>EndScreen</name>
             <fieldText>&lt;p&gt;View your created product by clicking the following link.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!varT_productFullUrl}&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;New Product Record: {!Get_Final_Product.Name}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;If using Commerce, make sure to &lt;strong&gt;Rebuild your Search Index&lt;/strong&gt; on your active stores from &lt;a href=&quot;{!varT_baseURL}/lightning/setup/CommerceStore/home&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;Commerce Setup&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Active Commerce Stores:&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;{!varT_baseURL}/lightning/r/WebStore/{!Get_b2bsm_Store_Id.Id}/view&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot;&gt;{!Get_b2bsm_Store_Id.Name}&lt;/a&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Insert_Image</name>
+        <label>Insert Image</label>
+        <locationX>534</locationX>
+        <locationY>638</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>If_ImageType</targetReference>
+        </connector>
+        <fields>
+            <name>ImageType</name>
+            <choiceReferences>URL</choiceReferences>
+            <choiceReferences>Upload</choiceReferences>
+            <dataType>String</dataType>
+            <defaultSelectedChoiceReference>URL</defaultSelectedChoiceReference>
+            <fieldText>ImageType</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Enter_Hyperlink</name>
+            <dataType>String</dataType>
+            <fieldText>Enter Hyperlink</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>ImageType</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>URL</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>FileUpload</name>
+            <extensionName>forceContent:fileUpload</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Upload Image to Files</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordId</name>
+                <value>
+                    <elementReference>Create_Baseline_Product</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>ImageType</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>Upload</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2329,6 +2524,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <scale>2</scale>
+    </variables>
+    <variables>
+        <name>ImageVersionId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>PriceToCostConversionFactor</name>
