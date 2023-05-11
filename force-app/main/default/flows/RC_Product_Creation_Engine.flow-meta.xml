@@ -4,7 +4,7 @@
         <name>GetOrgBaseUrl</name>
         <label>GetOrgBaseUrl</label>
         <locationX>534</locationX>
-        <locationY>8174</locationY>
+        <locationY>8534</locationY>
         <actionName>GetOrgBaseUrl</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -516,7 +516,7 @@
             <targetReference>Create_Product_Category_Products</targetReference>
         </nextValueConnector>
         <noMoreValuesConnector>
-            <targetReference>Get_Final_Product</targetReference>
+            <targetReference>Get_Billing_Policy</targetReference>
         </noMoreValuesConnector>
     </loops>
     <loops>
@@ -1306,7 +1306,7 @@
         <name>Get_b2bsm_Store_Id</name>
         <label>Get b2bsm Store Id</label>
         <locationX>534</locationX>
-        <locationY>8294</locationY>
+        <locationY>8654</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>End</targetReference>
@@ -1321,6 +1321,27 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>WebStore</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Billing_Policy</name>
+        <label>Get Billing Policy</label>
+        <locationX>402</locationX>
+        <locationY>7958</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Tax_Policy</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>Default</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>BillingPolicy</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -1348,7 +1369,7 @@
         <name>Get_Final_Product</name>
         <label>Get Final Product</label>
         <locationX>534</locationX>
-        <locationY>8054</locationY>
+        <locationY>8414</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>GetOrgBaseUrl</targetReference>
@@ -1405,6 +1426,27 @@
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
         <object>Pricebook2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Tax_Policy</name>
+        <label>Get Tax Policy</label>
+        <locationX>402</locationX>
+        <locationY>8078</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>UpdateSMFields</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>Default</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>TaxPolicy</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
@@ -1802,6 +1844,36 @@
         </inputAssignments>
         <object>Product2</object>
     </recordUpdates>
+    <recordUpdates>
+        <name>UpdateSMFields</name>
+        <label>UpdateSMFields</label>
+        <locationX>402</locationX>
+        <locationY>8198</locationY>
+        <connector>
+            <targetReference>Get_Final_Product</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Create_Baseline_Product</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>BillingPolicyId</field>
+            <value>
+                <elementReference>Get_Billing_Policy.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>TaxPolicyId</field>
+            <value>
+                <elementReference>Get_Tax_Policy.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Product2</object>
+    </recordUpdates>
     <runInMode>DefaultMode</runInMode>
     <screens>
         <name>Baseline_Product_Fields</name>
@@ -2161,7 +2233,7 @@
         <name>End</name>
         <label>End</label>
         <locationX>534</locationX>
-        <locationY>8414</locationY>
+        <locationY>8774</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
